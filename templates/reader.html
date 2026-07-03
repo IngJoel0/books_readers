@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ book.title }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  </head>
+  <body class="reader-shell">
+    <div class="cursor-glow"></div>
+    <div class="noise-layer"></div>
+
+    <div class="reader-topbar">
+      <a class="back-link" href="{{ url_for('library') }}">Biblioteca</a>
+      <div class="reader-titleblock">
+        <strong>{{ book.title }}</strong>
+        <span>{{ book.page_count }} paginas · {{ book.size_label }}</span>
+      </div>
+      <div class="reader-actions">
+        <button id="readerExpandButton" class="reader-action-button" type="button">
+          Modo amplio
+        </button>
+        <button id="readerFullscreenButton" class="reader-action-button reader-action-button-accent" type="button">
+          Pantalla completa
+        </button>
+      </div>
+    </div>
+
+    <main id="readerLayout" class="reader-layout">
+      <aside class="reader-sidebar">
+        <img src="{{ book.cover_url }}" alt="Portada de {{ book.title }}">
+        <p class="reader-path">{{ book.relative_path }}</p>
+      </aside>
+
+      <section id="readerFrameWrap" class="reader-frame-wrap">
+        <iframe class="reader-frame" src="{{ book.pdf_url }}#view=FitH" title="{{ book.title }}"></iframe>
+      </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+  </body>
+</html>

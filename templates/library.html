@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Biblioteca PDF</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  </head>
+  <body class="library-shell">
+    <div class="cursor-glow"></div>
+    <div class="noise-layer"></div>
+    <div class="ambient ambient-left"></div>
+    <div class="ambient ambient-right"></div>
+
+    <header class="hero">
+      <div class="hero-copyblock">
+        <p class="eyebrow">PDF Readers</p>
+        <div class="hero-title-wrap">
+          <h1 id="heroTitle">Biblioteca para lectores de PDF</h1>
+          <div class="blood-rain" id="bloodRain" aria-hidden="true"></div>
+        </div>
+        <p class="hero-copy">Made it with love by Joel</p>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-card">
+          <span class="stat-label">Libros</span>
+          <strong>{{ book_count }}</strong>
+        </div>
+        <div class="stat-card upload-card">
+          <span class="stat-label">Agregar libros</span>
+          <form class="upload-form" action="{{ url_for('upload_book') }}" method="post" enctype="multipart/form-data">
+            <input id="pdfFileInput" class="upload-input" type="file" name="pdf_file" accept="application/pdf,.pdf">
+            <label class="upload-button" for="pdfFileInput">Seleccionar PDF</label>
+          </form>
+        </div>
+      </div>
+    </header>
+
+    {% if upload_status == "success" %}
+    <p class="status-banner status-success">Libro agregado a <code>{{ library_root }}</code>.</p>
+    {% elif upload_status == "invalid" %}
+    <p class="status-banner status-error">Solo se permiten archivos PDF.</p>
+    {% elif upload_status == "missing" %}
+    <p class="status-banner status-error">Selecciona un archivo antes de subirlo.</p>
+    {% endif %}
+
+    <section class="toolbar">
+      <label class="search">
+        <span>Buscar</span>
+        <input id="searchInput" type="search" placeholder="Titulo o archivo">
+      </label>
+    </section>
+
+    <main>
+      {% if has_books %}
+      <section id="booksGrid" class="book-grid">
+        {% for book in books %}
+        <article class="book-card" data-search="{{ (book.title ~ ' ' ~ book.relative_path)|lower }}">
+          <a class="book-link" href="{{ book.reader_url }}">
+            <div class="cover-wrap">
+              <img src="{{ book.cover_url }}" alt="Portada de {{ book.title }}" loading="lazy">
+            </div>
+            <div class="book-meta">
+              <h2>{{ book.title }}</h2>
+              <p>{{ book.relative_path }}</p>
+              <div class="pill-row">
+                <span>{{ book.page_count }} paginas</span>
+                <span>{{ book.size_label }}</span>
+              </div>
+            </div>
+          </a>
+        </article>
+        {% endfor %}
+      </section>
+      {% else %}
+      <section class="empty-library">
+        <h2>Tu biblioteca esta esperando sus primeros grimorios</h2>
+        <p>
+          Crea la carpeta <strong>pdfs_books</strong> dentro del proyecto y coloca ahi tus archivos PDF,
+          o usa el boton de arriba para subirlos y que la app los copie automaticamente.
+        </p>
+      </section>
+      {% endif %}
+      <p id="emptyState" class="empty-state" hidden>No encontre libros con ese texto.</p>
+    </main>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+  </body>
+</html>

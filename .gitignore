@@ -1,0 +1,7 @@
+.venv/
+env/
+__pycache__/
+*.pyc
+.cache/
+pdfs_books/
+libros_26_jun_26/
