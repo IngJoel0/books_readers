@@ -52,6 +52,22 @@ Luego abre:
 http://127.0.0.1:5000
 ```
 
+## Abrir con doble clic
+
+Si quieres abrir el proyecto como si fuera una app local, usa el archivo:
+
+```text
+Abrir Biblioteca PDF.bat
+```
+
+Ese archivo:
+
+- inicia el servidor local
+- crea la carpeta `pdfs_books/` si hace falta
+- abre automaticamente el navegador en `http://127.0.0.1:5000`
+
+Tambien se incluye `launch_library.pyw`, que permite ejecutar la app sin tener que abrir una consola manualmente.
+
 ## Como agregar tus PDFs
 
 Por defecto la app usa la carpeta `pdfs_books/` dentro del proyecto.

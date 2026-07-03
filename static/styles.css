@@ -7,8 +7,8 @@
   --muted: #aa9793;
   --line: rgba(185, 33, 47, 0.22);
   --accent: #9d0f21;
-  --accent-bright: #d7293f;
-  --accent-soft: rgba(146, 15, 30, 0.574);
+  --accent-bright: #d72929;
+  --accent-soft: rgba(186, 15, 15, 0.774);
   --shadow: 0 24px 80px rgba(0, 0, 0, 0.55);
   --radius-xl: 28px;
   --radius-lg: 22px;
@@ -49,8 +49,8 @@ body {
   z-index: 0;
   background:
     radial-gradient(
-      circle 240px at var(--pointer-x) var(--pointer-y),
-      rgba(150, 16, 31, 0.18),
+      circle 440px at var(--pointer-x) var(--pointer-y),
+      rgba(211, 14, 37, 0.309),
       rgba(150, 16, 31, 0.08) 38%,
       transparent 72%
     );
