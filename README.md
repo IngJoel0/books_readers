@@ -54,13 +54,13 @@ http://127.0.0.1:5000
 
 ## Abrir con doble clic
 
-Si quieres abrir el proyecto como si fuera una app local, usa el archivo:
+Si quieres abrir el proyecto como si fuera una app local desde el escritorio, puedes crear un acceso directo al archivo:
 
 ```text
 Abrir Biblioteca PDF.bat
 ```
 
-Ese archivo:
+Ese `.bat` esta pensado para lanzarse desde un acceso directo en el escritorio y:
 
 - inicia el servidor local
 - crea la carpeta `pdfs_books/` si hace falta
